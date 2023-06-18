@@ -18,6 +18,23 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
+  Widget calcButton(String btnTxt, Color btnColor, Color txtColor) {
+    return Container(
+      child: ElevatedButton(
+        onPressed: () {
+          // TODO add function for button press
+        },
+        child: Text(
+          btnTxt,
+          style: TextStyle(
+            fontSize: 35,
+            color: txtColor,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +43,37 @@ class _CalculatorState extends State<Calculator> {
         title: const Text('Calculator'),
         backgroundColor: Colors.black,
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [],
+          children: [
+            // Calculator display
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    '0',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 100,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Here buttons functions will be called where we will pass
+                // some arguments
+                calcButton('AC', Colors.grey, Colors.black)
+              ],
+            )
+          ],
         ),
       ),
     );
