@@ -24,6 +24,11 @@ class _CalculatorState extends State<Calculator> {
         onPressed: () {
           // TODO add function for button press
         },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey,
+          shape: const CircleBorder(),
+          padding: const EdgeInsets.all(8),
+        ),
         child: Text(
           btnTxt,
           style: TextStyle(
