@@ -25,7 +25,7 @@ class _CalculatorState extends State<Calculator> {
           // TODO add function for button press
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey,
+          backgroundColor: btnColor,
           shape: const CircleBorder(),
           padding: const EdgeInsets.all(8),
         ),
@@ -53,7 +53,7 @@ class _CalculatorState extends State<Calculator> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            // Calculator display
+            // Calculator display.
             const Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -74,10 +74,31 @@ class _CalculatorState extends State<Calculator> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // Here buttons functions will be called where we will pass
-                // some arguments
-                calcButton('AC', Colors.grey, Colors.black)
+                // some arguments.
+                // Note: When using Colors.grey[300], you're actually getting
+                // the color from a Map which Dart (in null-safe mode) warns
+                // you about because that value could be null.
+                // So, either use the bang operator Colors.grey[750] OR shade
+                // on the color.
+                calcButton('AC', Colors.grey, Colors.black),
+                calcButton('+/-', Colors.grey, Colors.black),
+                calcButton('%', Colors.grey, Colors.black),
+                calcButton('/', Colors.amber[700]!, Colors.white),
               ],
-            )
+            ),
+            const SizedBox(height: 10),
+            // Now we will copy the above row code and make more rows.
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Here buttons functions will be called where we will pass
+                // some arguments.
+                calcButton('7', Colors.grey[850]!, Colors.white),
+                calcButton('8', Colors.grey[850]!, Colors.white),
+                calcButton('9', Colors.grey[850]!, Colors.white),
+                calcButton('x', Colors.amber.shade700, Colors.white),
+              ],
+            ),
           ],
         ),
       ),
