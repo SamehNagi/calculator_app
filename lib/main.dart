@@ -99,6 +99,57 @@ class _CalculatorState extends State<Calculator> {
                 calcButton('x', Colors.amber.shade700, Colors.white),
               ],
             ),
+            const SizedBox(height: 10),
+            // Same as above, we will make more rows in similar way.
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Here buttons functions will be called where we will pass
+                // some arguments.
+                calcButton('4', Colors.grey[850]!, Colors.white),
+                calcButton('5', Colors.grey[850]!, Colors.white),
+                calcButton('6', Colors.grey[850]!, Colors.white),
+                calcButton('-', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+            const SizedBox(height: 10),
+            // Same as above, we will make more rows in similar way.
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Here buttons functions will be called where we will pass
+                // some arguments.
+                calcButton('1', Colors.grey[850]!, Colors.white),
+                calcButton('2', Colors.grey[850]!, Colors.white),
+                calcButton('3', Colors.grey[850]!, Colors.white),
+                calcButton('+', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+            const SizedBox(height: 10),
+            // Now last row is different as it has the 0 button.
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // This is button 0
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[850]!,
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.fromLTRB(25, 8, 100, 8),
+                  ),
+                  child: const Text(
+                    "0",
+                    style: TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                calcButton('.', Colors.grey[850]!, Colors.white),
+                calcButton('=', Colors.amber[700]!, Colors.white),
+              ],
+            ),
           ],
         ),
       ),
