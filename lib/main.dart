@@ -280,8 +280,9 @@ class _CalculatorState extends State<Calculator> {
   String doesContainDecimal(dynamic result) {
     if (result.toString().contains('.')) {
       List<String> splitDecimal = result.toString().split('.');
-      if (!(int.parse(splitDecimal[1]) > 0))
+      if (!(int.parse(splitDecimal[1]) > 0)) {
         return result = splitDecimal[0].toString();
+      }
     }
     return result;
   }
