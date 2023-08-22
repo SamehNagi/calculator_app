@@ -18,6 +18,9 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
+  // New variable to store the operation being performed
+  String operation = '';
+
   Widget calcButton(String btnTxt, Color btnColor, Color txtColor) {
     return Container(
       child: ElevatedButton(
@@ -53,6 +56,14 @@ class _CalculatorState extends State<Calculator> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            // Display the operation at the top
+            Text(
+              operation,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+              ),
+            ),
             // Calculator display.
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -156,68 +167,39 @@ class _CalculatorState extends State<Calculator> {
     );
   }
 
-  // Calculator logic
+// Calculator logic
   dynamic text = '0';
   double firstNum = 0;
   double secondNum = 0;
-
-  dynamic result = '';
   dynamic finalResult = '';
+  dynamic result = '';
   dynamic opr = '';
-  dynamic preOpr = '';
+
   void calculation(btnText) {
     if (btnText == 'AC') {
       // Resets all variables to their initial values, effectively resetting the calculator.
       resetCalculator();
-    } else if (opr == '=' && btnText == '=') {
-      // Perform the calculation based on the previous operator (preOpr).
-      performOperation();
     } else if (btnText == '+' ||
         btnText == '-' ||
         btnText == 'x' ||
         btnText == '/' ||
         btnText == '=') {
-      // Handles the arithmetic operations by updating the firstNum, secondNum,
-      // opr, and preOpr variables accordingly and performing the corresponding
-      // calculation.
+      // Update firstNum and secondNum
       if (firstNum == 0) {
-        firstNum = double.parse(result);
+        firstNum = double.parse(finalResult);
       } else {
-        secondNum = double.parse(result);
+        secondNum = double.parse(finalResult);
       }
 
-      if (opr == '+') {
-        finalResult = add();
-      } else if (opr == '-') {
-        finalResult = sub();
-      } else if (opr == 'x') {
-        finalResult = mul();
-      } else if (opr == '/') {
-        finalResult = div();
-      }
-      preOpr = opr;
+      // Handle the arithmetic operation
+      performOperation();
+
       opr = btnText;
       result = '';
-    } else if (btnText == '%') {
-      // Calculates the percentage of numOne and assigns the result to result
-      // after checking for decimal places.
-      result = firstNum / 100;
-      finalResult = doesContainDecimal(result);
-    } else if (btnText == '.') {
-      if (!result.toString().contains('.')) {
-        //result = result.toString() + '.';
-        result = '${result.toString()}.';
-      }
-      finalResult = result;
-    } else if (btnText == '+/-') {
-      result.toString().startsWith('-')
-          ? result = result.toString().substring(1)
-          : result = '-${result.toString()}';
-      finalResult = result;
     } else {
       // If the input is any other digit or operator, it appends the input
       // to the result.
-      result = result + btnText;
+      result += btnText;
       finalResult = result;
     }
 
@@ -235,44 +217,47 @@ class _CalculatorState extends State<Calculator> {
     text = '0';
     firstNum = 0;
     secondNum = 0;
-    result = '';
     finalResult = '0';
+    result = '';
     opr = '';
-    preOpr = '';
   }
 
   void performOperation() {
-    if (preOpr == '+') {
+    if (opr == '+') {
       finalResult = add();
-    } else if (preOpr == '-') {
+    } else if (opr == '-') {
       finalResult = sub();
-    } else if (preOpr == 'x') {
+    } else if (opr == 'x') {
       finalResult = mul();
-    } else if (preOpr == '/') {
+    } else if (opr == '/') {
       finalResult = div();
     }
   }
 
   String add() {
     result = (firstNum + secondNum).toString();
+    // Updating firstNum with the result for future operations
     firstNum = double.parse(result);
     return doesContainDecimal(result);
   }
 
   String sub() {
     result = (firstNum - secondNum).toString();
+    // Updating firstNum with the result for future operations
     firstNum = double.parse(result);
     return doesContainDecimal(result);
   }
 
   String mul() {
     result = (firstNum * secondNum).toString();
+    // Updating firstNum with the result for future operations
     firstNum = double.parse(result);
     return doesContainDecimal(result);
   }
 
   String div() {
     result = (firstNum / secondNum).toString();
+    // Updating firstNum with the result for future operations
     firstNum = double.parse(result);
     return doesContainDecimal(result);
   }
