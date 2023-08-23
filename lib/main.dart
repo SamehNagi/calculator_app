@@ -196,6 +196,9 @@ class _CalculatorState extends State<Calculator> {
 
       opr = btnText;
       result = '';
+    } else if (btnText == '%') {
+      // Calculates the percentage of firstNum
+      finalResult = getPercentage();
     } else {
       // If the input is any other digit or operator, it appends the input
       // to the result.
@@ -262,10 +265,23 @@ class _CalculatorState extends State<Calculator> {
     return doesContainDecimal(result);
   }
 
+  String getPercentage() {
+    // Update firstNum
+    firstNum = double.parse(finalResult);
+    // Calculates the percentage of firstNum
+    result = (firstNum / 100).toString();
+    // Updating firstNum with the result for future operations
+    firstNum = double.parse(result);
+    // Return the result after checking for decimal places.
+    return doesContainDecimal(result);
+  }
+
   String doesContainDecimal(dynamic result) {
     if (result.toString().contains('.')) {
       List<String> splitDecimal = result.toString().split('.');
       if (!(int.parse(splitDecimal[1]) > 0)) {
+        // Remove the decimal point if the number after the decimal point
+        // equal 0
         return result = splitDecimal[0].toString();
       }
     }
